@@ -20,59 +20,61 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_checkBox_toggled(bool checked)
+void MainWindow::on_checkBox_toggled()
 {
-    ui->lineEdit->setEnabled(true);
-    if (ui->checkBox->isEnabled()) {
+    if (ui->checkBox->isChecked() == false) {
         ui->lineEdit->setText("");
         ui->lineEdit->setPlaceholderText("Podaj kurs");
+        on_lineEdit_2_textChanged();
     }
+       ui->lineEdit->setEnabled(true);
 }
 
-void MainWindow::on_checkBox_2_toggled(bool checked)
+void MainWindow::on_checkBox_2_toggled()
 {
-    ui->lineEdit_2->setEnabled(true);
-    if (ui->checkBox_2->isEnabled()) {
+    if (ui->checkBox_2->isChecked() == false) {
         ui->lineEdit_2->setText("");
         ui->lineEdit_2->setPlaceholderText("Podaj kurs");
+        on_lineEdit_textChanged();
     }
+        ui->lineEdit_2->setEnabled(true);
 }
 
-void MainWindow::on_lineEdit_textChanged(const QString &arg1)
+void MainWindow::on_lineEdit_textChanged()
 {
     dollar = ui->lineEdit->text().toDouble();
     cash = ui->lineEdit_3->text().toDouble();
     res = dollar*cash;
-    r = QString::number(res);
-    ui->label_7->setText(r);
+    r = QString::number(res, 'f', 2);
+    ui->label_7->setText(r + " PLN");
 }
 
-void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
+void MainWindow::on_lineEdit_2_textChanged()
 {
-    dollar = ui->lineEdit_2->text().toDouble();
+    euro = ui->lineEdit_2->text().toDouble();
     cash = ui->lineEdit_3->text().toDouble();
-    res = dollar*cash;
-    r = QString::number(res);
-    ui->label_7->setText(r);
+    res = euro*cash;
+    r = QString::number(res, 'f', 2);
+    ui->label_7->setText(r + " PLN");
 }
 
-void MainWindow::on_lineEdit_3_textChanged(const QString &arg1)
+void MainWindow::on_lineEdit_3_textChanged()
 {
     if(ui->lineEdit->isEnabled()) {
-        euro = ui->lineEdit->text().toDouble();
+        dollar = ui->lineEdit->text().toDouble();
         cash = ui->lineEdit_3->text().toDouble();
         res = dollar*cash;
-        r = QString::number(res);
+        r = QString::number(res, 'f', 2);
 
-        ui->label_7->setText(r);
+        ui->label_7->setText(r + " PLN");
     }
 
     if(ui->lineEdit_2->isEnabled()) {
         euro = ui->lineEdit_2->text().toDouble();
         cash = ui->lineEdit_3->text().toDouble();
-        res = dollar*cash;
-        r = QString::number(res);
+        res = euro*cash;
+        r = QString::number(res, 'f', 2);
 
-        ui->label_7->setText(r);
+        ui->label_7->setText(r + " PLN");
     }
 }
