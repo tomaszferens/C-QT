@@ -8,6 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->lineEdit->setDisabled(true);
     ui->lineEdit_2->setDisabled(true);
+    connect(ui->checkBox,SIGNAL(toggled(bool)),
+            ui->lineEdit,SLOT(setEnabled(bool)));
+    connect(ui->checkBox_2,SIGNAL(toggled(bool)),
+            ui->lineEdit_2,SLOT(setEnabled(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -15,23 +19,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::on_checkBox_toggled(bool checked)
 {
     ui->lineEdit->setEnabled(true);
-    if (ui->checkBox->isEnabled())
-        ui->lineEdit->setText("0");
-    connect(ui->checkBox,SIGNAL(toggled(bool)),
-            ui->lineEdit,SLOT(setEnabled(bool)));
-
+    if (ui->checkBox->isEnabled()) {
+        ui->lineEdit->setText("");
+        ui->lineEdit->setPlaceholderText("Podaj kurs");
+    }
 }
 
 void MainWindow::on_checkBox_2_toggled(bool checked)
 {
     ui->lineEdit_2->setEnabled(true);
-    if (ui->checkBox_2->isEnabled())
-        ui->lineEdit_2->setText("0");
-    connect(ui->checkBox_2,SIGNAL(toggled(bool)),
-            ui->lineEdit_2,SLOT(setEnabled(bool)));
+    if (ui->checkBox_2->isEnabled()) {
+        ui->lineEdit_2->setText("");
+        ui->lineEdit_2->setPlaceholderText("Podaj kurs");
+    }
 }
 
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
@@ -59,6 +63,7 @@ void MainWindow::on_lineEdit_3_textChanged(const QString &arg1)
         cash = ui->lineEdit_3->text().toDouble();
         res = dollar*cash;
         r = QString::number(res);
+
         ui->label_7->setText(r);
     }
 
@@ -67,6 +72,7 @@ void MainWindow::on_lineEdit_3_textChanged(const QString &arg1)
         cash = ui->lineEdit_3->text().toDouble();
         res = dollar*cash;
         r = QString::number(res);
+
         ui->label_7->setText(r);
     }
 }
