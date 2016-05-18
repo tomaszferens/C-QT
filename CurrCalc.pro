@@ -9,6 +9,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = CurrCalc
+RC_FILE = CurrCalc.qrc
 TEMPLATE = app
 
 
