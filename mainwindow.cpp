@@ -115,8 +115,8 @@ void MainWindow::on_lineEdit_3_textChanged()
     }
 
     QString c;
-    c = ui->lineEdit_3->text();
-    for (int i=0; i<ui->lineEdit_3->maxLength(); i++) {
+    c = ui->lineEdit_2->text();
+    for (int i=0; i<ui->lineEdit_2->maxLength(); i++) {
         if (c[i] == ',') {
             c[i] = '.';
         }
