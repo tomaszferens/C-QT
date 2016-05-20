@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->lineEdit,SLOT(setEnabled(bool)));
     connect(ui->checkBox_2,SIGNAL(toggled(bool)),
             ui->lineEdit_2,SLOT(setEnabled(bool)));
+
 }
 
 MainWindow::~MainWindow()
@@ -42,27 +43,88 @@ void MainWindow::on_checkBox_2_toggled()
 
 void MainWindow::on_lineEdit_textChanged()
 {
-    dollar = ui->lineEdit->text().toDouble();
-    cash = ui->lineEdit_3->text().toDouble();
+    QString a;
+    a = ui->lineEdit->text();
+    for (int i=0; i<ui->lineEdit->maxLength(); i++) {
+        if (a[i] == ',') {
+            a[i] = '.';
+        }
+    }
+
+    QString b;
+    b = ui->lineEdit_3->text();
+    for (int i=0; i<ui->lineEdit_3->maxLength(); i++) {
+        if (b[i] == ',') {
+            b[i] = '.';
+        }
+    }
+
+    dollar = a.toDouble();
+    cash = b.toDouble();
     res = dollar*cash;
     r = QString::number(res, 'f', 2);
     ui->label_7->setText(r + " PLN");
+    if (ui->label_7->text() == "0.00 PLN")
+        ui->label_7->setText("Kwota");
 }
 
 void MainWindow::on_lineEdit_2_textChanged()
 {
-    euro = ui->lineEdit_2->text().toDouble();
-    cash = ui->lineEdit_3->text().toDouble();
+    QString a;
+
+    a = ui->lineEdit_2->text();
+    for (int i=0; i<ui->lineEdit_2->maxLength(); i++) {
+        if (a[i] == ',') {
+            a[i] = '.';
+        }
+    }
+
+    QString b;
+
+    b = ui->lineEdit_3->text();
+    for (int i=0; i<ui->lineEdit_3->maxLength(); i++) {
+        if (b[i] == ',') {
+            b[i] = '.';
+        }
+    }
+    euro = a.toDouble();
+    cash = b.toDouble();
     res = euro*cash;
     r = QString::number(res, 'f', 2);
     ui->label_7->setText(r + " PLN");
+    if (ui->label_7->text() == "0.00 PLN")
+        ui->label_7->setText("Kwota");
 }
 
 void MainWindow::on_lineEdit_3_textChanged()
 {
+    QString a;
+    a = ui->lineEdit_3->text();
+    for (int i=0; i<ui->lineEdit_3->maxLength(); i++) {
+        if (a[i] == ',') {
+            a[i] = '.';
+        }
+    }
+
+    QString b;
+    b = ui->lineEdit->text();
+    for (int i=0; i<ui->lineEdit_3->maxLength(); i++) {
+        if (b[i] == ',') {
+            b[i] = '.';
+        }
+    }
+
+    QString c;
+    c = ui->lineEdit_3->text();
+    for (int i=0; i<ui->lineEdit_3->maxLength(); i++) {
+        if (c[i] == ',') {
+            c[i] = '.';
+        }
+    }
+
     if(ui->lineEdit->isEnabled()) {
-        dollar = ui->lineEdit->text().toDouble();
-        cash = ui->lineEdit_3->text().toDouble();
+        dollar = b.toDouble();
+        cash = a.toDouble();
         res = dollar*cash;
         r = QString::number(res, 'f', 2);
 
@@ -70,11 +132,13 @@ void MainWindow::on_lineEdit_3_textChanged()
     }
 
     if(ui->lineEdit_2->isEnabled()) {
-        euro = ui->lineEdit_2->text().toDouble();
-        cash = ui->lineEdit_3->text().toDouble();
+        euro = c.toDouble();
+        cash = a.toDouble();
         res = euro*cash;
         r = QString::number(res, 'f', 2);
 
         ui->label_7->setText(r + " PLN");
     }
+    if (ui->label_7->text() == "0.00 PLN")
+        ui->label_7->setText("Kwota");
 }
