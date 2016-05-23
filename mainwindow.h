@@ -21,10 +21,13 @@ class MainWindow : public QMainWindow
 public:
     double dollar;
     double cash;
-    double res;
+    double resd;
+    double rese;
     double euro;
     int line_edited;
-    QString r;
+    bool check_for_color;
+    QString rd;
+    QString re;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void onResult (QNetworkReply *reply);
@@ -41,6 +44,7 @@ private slots:
     void on_lineEdit_3_textChanged();
 
     void on_pushButton_2_clicked();
+    void change();
 
 private:
     Ui::MainWindow *ui;
