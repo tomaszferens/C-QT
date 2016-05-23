@@ -13,12 +13,36 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->checkBox_2,SIGNAL(toggled(bool)),
             ui->lineEdit_2,SLOT(setEnabled(bool)));
 
+
 }
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::onResult(QNetworkReply *reply)
+{
+ if (!reply->error()) {
+     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+     QJsonObject root = document.object();
+     QJsonValue jv = root.value("quotes");
+     QJsonObject jo = jv.toObject();
+     if (ui->lineEdit->isEnabled())
+     ui->lineEdit->setText(QString::number((jo.value(jo.keys().at(117)).toDouble())));
+     if (ui->lineEdit_2->isEnabled()) {
+        double USDEUR = jo.value(jo.keys().at(46)).toDouble();
+        double USDPLN = jo.value(jo.keys().at(117)).toDouble();
+        double PLNEUR = (1/USDEUR) * USDPLN;
+
+        ui->lineEdit_2->setText(QString::number(PLNEUR));
+     }
+
+ }
+ reply->deleteLater();
+
+ }
 
 
 void MainWindow::on_checkBox_toggled()
@@ -141,4 +165,11 @@ void MainWindow::on_lineEdit_3_textChanged()
     }
     if (ui->label_7->text() == "0.00 PLN")
         ui->label_7->setText("Kwota");
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+        networkManager = new QNetworkAccessManager();
+        connect(networkManager, &QNetworkAccessManager::finished, this, &MainWindow::onResult);
+        networkManager->get(QNetworkRequest(QUrl("http://apilayer.net/api/live?access_key=a2712922ea49e46b78e54cb9ba3f0c8b")));
 }

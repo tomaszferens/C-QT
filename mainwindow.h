@@ -2,6 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QJsonDocument>
+#include <QNetworkAccessManager>
+#include <QUrl>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrlQuery>
+#include <QNetworkReply>
+
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +27,7 @@ public:
     QString r;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void onResult (QNetworkReply *reply);
 
 private slots:
     void on_checkBox_toggled();
@@ -31,8 +40,11 @@ private slots:
 
     void on_lineEdit_3_textChanged();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QNetworkAccessManager *networkManager;
 };
 
 #endif // MAINWINDOW_H

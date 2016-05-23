@@ -128,6 +128,13 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="5">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Aktualny kurs</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="5" column="0">
