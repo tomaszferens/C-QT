@@ -29,10 +29,9 @@ void MainWindow::onResult(QNetworkReply *reply)
      QJsonObject jo = jv.toObject();
      if (ui->lineEdit->isEnabled()) {
          double USDPLN_2 = jo.value(jo.keys().at(117)).toDouble();
-         QString Susdpln_2 = QString::number(USDPLN_2);
-         Susdpln_2[1] = ',';
-         ui->lineEdit->setText(Susdpln_2);
-
+         QString Susdpln = QString::number(USDPLN_2);
+         Susdpln[1] = ',';
+         ui->lineEdit->setText(Susdpln);
      }
      if (ui->lineEdit_2->isEnabled()) {
         double USDEUR = jo.value(jo.keys().at(46)).toDouble();
@@ -48,7 +47,6 @@ void MainWindow::onResult(QNetworkReply *reply)
  reply->deleteLater();
 
  }
-
 
 void MainWindow::on_checkBox_toggled()
 {
