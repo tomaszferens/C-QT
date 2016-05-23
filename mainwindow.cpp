@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->lineEdit,SLOT(setEnabled(bool)));
     connect(ui->checkBox_2,SIGNAL(toggled(bool)),
             ui->lineEdit_2,SLOT(setEnabled(bool)));
-
 }
 
 
