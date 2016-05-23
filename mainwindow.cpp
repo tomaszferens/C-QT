@@ -29,14 +29,21 @@ void MainWindow::onResult(QNetworkReply *reply)
      QJsonObject root = document.object();
      QJsonValue jv = root.value("quotes");
      QJsonObject jo = jv.toObject();
-     if (ui->lineEdit->isEnabled())
-     ui->lineEdit->setText(QString::number((jo.value(jo.keys().at(117)).toDouble())));
+     if (ui->lineEdit->isEnabled()) {
+         double USDPLN_2 = jo.value(jo.keys().at(117)).toDouble();
+         QString Susdpln_2 = QString::number(USDPLN_2);
+         Susdpln_2[1] = ',';
+         ui->lineEdit->setText(Susdpln_2);
+
+     }
      if (ui->lineEdit_2->isEnabled()) {
         double USDEUR = jo.value(jo.keys().at(46)).toDouble();
         double USDPLN = jo.value(jo.keys().at(117)).toDouble();
         double PLNEUR = (1/USDEUR) * USDPLN;
+        QString Splneur = QString::number(PLNEUR);
+        Splneur[1] = ',';
 
-        ui->lineEdit_2->setText(QString::number(PLNEUR));
+        ui->lineEdit_2->setText(Splneur);
      }
 
  }
@@ -67,6 +74,7 @@ void MainWindow::on_checkBox_2_toggled()
 
 void MainWindow::on_lineEdit_textChanged()
 {
+
     QString a;
     a = ui->lineEdit->text();
     for (int i=0; i<ui->lineEdit->maxLength(); i++) {
@@ -90,6 +98,10 @@ void MainWindow::on_lineEdit_textChanged()
     ui->label_7->setText(r + " PLN");
     if (ui->label_7->text() == "0.00 PLN")
         ui->label_7->setText("Kwota");
+
+    if (ui->lineEdit->text() == "" && ui->lineEdit_2->text() != "")
+        on_lineEdit_2_textChanged();
+
 }
 
 void MainWindow::on_lineEdit_2_textChanged()
@@ -118,6 +130,9 @@ void MainWindow::on_lineEdit_2_textChanged()
     ui->label_7->setText(r + " PLN");
     if (ui->label_7->text() == "0.00 PLN")
         ui->label_7->setText("Kwota");
+
+    if (ui->lineEdit_2->text() == "" && ui->lineEdit->text() != "")
+        on_lineEdit_textChanged();
 }
 
 void MainWindow::on_lineEdit_3_textChanged()

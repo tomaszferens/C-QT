@@ -6,7 +6,6 @@
 #include <QNetworkAccessManager>
 #include <QUrl>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QUrlQuery>
 #include <QNetworkReply>
 
