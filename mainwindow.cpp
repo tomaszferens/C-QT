@@ -72,7 +72,7 @@ void MainWindow::on_checkBox_2_toggled()
         ui->lineEdit_2->setEnabled(true);
 }
 
-void MainWindow::on_lineEdit_textChanged()
+int MainWindow::on_lineEdit_textChanged()
 {
 
     QString a;
@@ -102,9 +102,11 @@ void MainWindow::on_lineEdit_textChanged()
     if (ui->lineEdit->text() == "" && ui->lineEdit_2->text() != "")
         on_lineEdit_2_textChanged();
 
+    line_edit = 1;
+    return line_edit;
 }
 
-void MainWindow::on_lineEdit_2_textChanged()
+int MainWindow::on_lineEdit_2_textChanged()
 {
     QString a;
 
@@ -133,6 +135,9 @@ void MainWindow::on_lineEdit_2_textChanged()
 
     if (ui->lineEdit_2->text() == "" && ui->lineEdit->text() != "")
         on_lineEdit_textChanged();
+
+    line_edit = 2;
+    return line_edit;
 }
 
 void MainWindow::on_lineEdit_3_textChanged()
@@ -161,7 +166,7 @@ void MainWindow::on_lineEdit_3_textChanged()
         }
     }
 
-    if(ui->lineEdit->isEnabled()) {
+    if(line_edit == 1) {
         dollar = b.toDouble();
         cash = a.toDouble();
         res = dollar*cash;
@@ -170,7 +175,7 @@ void MainWindow::on_lineEdit_3_textChanged()
         ui->label_7->setText(r + " PLN");
     }
 
-    if(ui->lineEdit_2->isEnabled()) {
+    if(line_edit == 2) {
         euro = c.toDouble();
         cash = a.toDouble();
         res = euro*cash;
