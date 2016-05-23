@@ -43,10 +43,8 @@ void MainWindow::onResult(QNetworkReply *reply)
 
         ui->lineEdit_2->setText(Splneur);
      }
-
  }
- reply->deleteLater();
-
+    reply->deleteLater();
  }
 
 
@@ -80,7 +78,6 @@ void MainWindow::on_checkBox_2_toggled()
 
 void MainWindow::on_lineEdit_textChanged()
 {
-
     QString a;
     a = ui->lineEdit->text();
     for (int i=0; i<ui->lineEdit->maxLength(); i++) {
