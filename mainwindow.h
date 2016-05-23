@@ -23,7 +23,7 @@ public:
     double cash;
     double res;
     double euro;
-    int line_edit;
+    int line_edited;
     QString r;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -34,9 +34,9 @@ private slots:
 
     void on_checkBox_2_toggled();
 
-    int on_lineEdit_textChanged();
+    void on_lineEdit_textChanged();
 
-    int on_lineEdit_2_textChanged();
+    void on_lineEdit_2_textChanged();
 
     void on_lineEdit_3_textChanged();
 
